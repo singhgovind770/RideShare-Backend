@@ -50,7 +50,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/driver',driver)
 app.use('/rider',rider)
 
-
+app.get('/', function(req, res){
+  res.json({
+    "Status":"true",
+    "Message":'it is working'});
+  });
 
 app.get('*', function(req, res){
   res.status(404).json({
@@ -84,7 +88,7 @@ globalEmitter.on('do_something', (data)=>{
 
   });
 
-  
+
   // const small = new driverModel({ Location : {type:'Point' ,coordinates:[28.540859541752734, 77.38695519212665]}, Name: 'GOVIND SINGH', MobNumber:9015025959, Vehicle_info:'Audi R8 UP16 GV1999'});
   // small.save()
   
