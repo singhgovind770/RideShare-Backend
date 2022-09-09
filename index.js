@@ -5,6 +5,7 @@ var corsOptions = {
   origin: ['http://192.168.5.88','http://192.168.5.88:3000'],
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
+app.use(cors(corsOptions))
 const port = process.env.PORT || 4000;
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
@@ -42,7 +43,6 @@ const server = app.listen(port, ()=>{
 
 
 
-app.use(cors(corsOptions))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -51,6 +51,7 @@ app.use('/driver',driver)
 app.use('/rider',rider)
 
 app.get('/', function(req, res){
+  res.header("Access-Control-Allow-Origin", "*");
   res.json({
     "Status":"true",
     "Message":'it is working'});
@@ -100,3 +101,5 @@ globalEmitter.on('do_something', (data)=>{
     // }
     
 // getall()
+
+console.log(ip.address());
