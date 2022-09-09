@@ -76,7 +76,7 @@ io.on('connection', (socket)=>{
     socket.on('join', function(room) {
       socket.join(room);
       console.log("connection establised to "+room)
-    });
+    })
     
     
     // socket.emit("ride")
