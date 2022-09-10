@@ -12,6 +12,7 @@ module.exports = function Auth(req,res,next){
     }
     catch(err){
         console.log(err)
+        res.header("Access-Control-Allow-Origin", "*");
         res.json({"error":err, "message":"jwt token error"})
     }
 }

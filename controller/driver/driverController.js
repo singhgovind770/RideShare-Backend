@@ -111,6 +111,7 @@ async function signInDriver(req, res, next){
                         if(result){
 
                             const Token = jwt.sign({ id: signIn._id }, process.env.SECERET_KEY)
+                            res.header("Access-Control-Allow-Origin", "*");
                             res.json({
                                 "Message":"You Have Successfully Logged In!",
                                 "Result":result,

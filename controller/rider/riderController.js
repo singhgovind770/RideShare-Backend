@@ -15,6 +15,7 @@ async function createRider(req, res, next) {
                 const resp = await riderModel.create(data)
 
                 const Token = jwt.sign({ id: resp._id }, process.env.SECERET_KEY)
+                res.header("Access-Control-Allow-Origin", "*");
                 res.json({
                     "Message": "Account Created",
                     "token": Token,
@@ -25,6 +26,7 @@ async function createRider(req, res, next) {
 
         }
         else {
+            res.header("Access-Control-Allow-Origin", "*");
             res.json({
                 "Message": "User Already Exist",
                 "Result":false
@@ -33,6 +35,7 @@ async function createRider(req, res, next) {
     }
     catch (err) {
         console.log(err)
+        res.header("Access-Control-Allow-Origin", "*");
         res.json({ "Result":false, "Message": "Something went wrong", "error": err })
     }
 
@@ -44,6 +47,7 @@ async function loginRider(req, res, next) {
     try {
         const find = await riderModel.findOne({MobNumber:req.body.MobNumber})
         if(find==null){
+            
             res.json({"Message":"User Not found","Result":false})
         }
         else{
@@ -51,6 +55,7 @@ async function loginRider(req, res, next) {
 
             if(result){
                 const Token = jwt.sign({ id: find._id }, process.env.SECERET_KEY)
+                    
                     res.json({
                     "Message":"You Have Successfully Logged In!",
                     "Result":result,
@@ -60,6 +65,7 @@ async function loginRider(req, res, next) {
                 })  
             }
             else
+                
                 res.json({
                     "Message":"Unable to login, Invalid Password",
                     "Result":result
@@ -72,6 +78,7 @@ async function loginRider(req, res, next) {
     }
     catch (err) {
         console.log(err)
+        
         res.json({
             "Message":"Oops! Error Occured","Result":false,
             "error":err})
@@ -83,9 +90,11 @@ async function getRiderProfile(req,res,next){
     try{
         const find=await riderModel.findOne({MobNumber:req.body.MobNumber})
         if(find==null){
+            res.header("Access-Control-Allow-Origin", "*");
             res.json({"Message":"User Not found"})
         }
         else{
+            res.header("Access-Control-Allow-Origin", "*");
             res.json({
                 "Message":"User Found!",
                 "Result":find
@@ -93,6 +102,7 @@ async function getRiderProfile(req,res,next){
         }
 
     }catch(err){
+        res.header("Access-Control-Allow-Origin", "*");
         res.json({"error":err})
     }
 }
@@ -103,6 +113,7 @@ async function updateRiderProfile(req, res){
         const result = await riderModel.findOneAndUpdate(req.body.Filter, req.body.Update)
 
         if(result){
+            res.header("Access-Control-Allow-Origin", "*");
             res.json({
                 "Message":"User Updated!",
                 "Result":result
@@ -110,15 +121,19 @@ async function updateRiderProfile(req, res){
             
         }
         else
+        res.header("Access-Control-Allow-Origin", "*");
         res.json({
             "Message":"User Does Not Exist",
             "Result":result
         })
     }
     catch(error){
+        res.header("Access-Control-Allow-Origin", "*");
         res.json({"error":error})
     }
 }
+
+
 
 async function verify(req, res){
     try{
