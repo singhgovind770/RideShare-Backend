@@ -69,7 +69,7 @@ app.get('*', function(req, res){
 //  Sockets
 const io = require("socket.io")(server,{
   cors: {
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'https://rideshare0.web.app','https://rideshare0.firebaseapp.com']
   }
 })
 
