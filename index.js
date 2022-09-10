@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 var corsOptions = {
-  origin: ['http://localhost:3000'],
+  origin: ['http://localhost:3000', 'https://rideshare0.web.app'],
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions))
