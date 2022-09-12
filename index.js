@@ -15,6 +15,7 @@ const mongoose =  require('mongoose')
 const driverModel = require('./model/driverModel')
 const riderModel = require('./model/riderModel')
 const rider = require('./routes/rider')
+const ride  = require('./routes/ride')
 require('dotenv').config();
 const password = process.env.db_Password;
 const ip = require('ip')
@@ -50,6 +51,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/driver',driver)
 app.use('/rider',rider)
+app.use('/ride',ride)
 
 app.get('/', function(req, res){
   res.header("Access-Control-Allow-Origin", "*");
@@ -86,8 +88,8 @@ io.on('connection', (socket)=>{
   })
   
 globalEmitter.on('do_something', (data)=>{
-    console.log("Customer Request Sent to Driver")
-    io.in('630cc5a10a7369dc39f40792').emit('new_msg', {msg: 'hello'})
+    console.log("Messeage Sent")
+    io.in(data.id).emit('new_msg', {msg: data})
 
   });
 
@@ -104,4 +106,4 @@ globalEmitter.on('do_something', (data)=>{
     
 // getall()
 
-console.log(ip.address());
+// console.log(ip.address());

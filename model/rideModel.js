@@ -10,7 +10,7 @@ const rideModel = new mongoose.Schema({
         required:true
     },
     Fare:{
-        type:Number,
+        type:String,
         requied:true
     },
     Customer_id:{
@@ -27,9 +27,8 @@ const rideModel = new mongoose.Schema({
     }
 })
 
-const ride = mongoose.model("rideModel", rideModel)
+const ride = mongoose.model("ridemodels", rideModel)
 module.exports = ride
-
 
 
 
