@@ -54,17 +54,19 @@ async function createDriver(req, res, next) {
                             const Token = jwt.sign({ id: Res._id }, process.env.SECERET_KEY)
 
                             res.json({
-                                status: 'True',
+                                Result: true,
                                 Message: 'Congratulations! Your Account is Created ',
                                 token: Token,
-                                response: Res
+                                "id":Res._id,
+                                response: Res,
+                                "Name": Res.Name,
                             })
                         }
 
                         )
                         .catch(function (error) {
                             res.json({
-                                status: 'false',
+                                Result: 'false',
                                 Message: "Oops! Error Occured",
                                 Error: error
                             })
@@ -73,7 +75,7 @@ async function createDriver(req, res, next) {
             }
             else
                 res.json({
-                    Message: 'Your Account is Already Created',
+                    Message: 'Your Account is Already Exist',
                     response: Res
 
                 })
@@ -186,7 +188,7 @@ async function updatedriver(req, res, next) {
 }
 
 
-async function findDriver(req, res, next) {
+async function findDriver(req, res, next) { 
     console.log(req.body)
     const location = [req.body.lat, req.body.lng]
     // console.log(location)
@@ -242,9 +244,6 @@ async function findDriver(req, res, next) {
                     url: `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origin}&destinations=${destination}&units=imperial&key=${YOUR_API_KEY}&region=IN`
                 };
 
-
-                
-                
                 //Fetching Distance b/w "Pickup location" to "Driver Location" and Arrival Time of Driver for a Ride
                 axios(config).then(function (Response) {
                     // console.log(JSON.stringify(Response.data));
