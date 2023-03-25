@@ -1,6 +1,8 @@
 # RideShare-Backend
 RideShare is a ride-sharing application that connects drivers and riders for carpooling. This application allows riders to find drivers going in the same direction, and drivers to pick up riders going in the same direction. RideShare is a reliable and efficient way to travel while reducing traffic congestion and pollution.
 
+This is the backend for RideShare, a ride-sharing application.
+
 # Features
   - Sign up and login for both drivers and riders
   - Find rides and offer rides for carpooling
